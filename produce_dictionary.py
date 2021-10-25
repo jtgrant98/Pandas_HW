@@ -41,3 +41,13 @@ produce_dictionary = {'Potatoes': [0.86, 12219, 10508],
 
 
 
+import pandas as pd
+from pandas.core.frame import DataFrame
+
+Produce = pd.DataFrame(produce_dictionary)
+
+result = DataFrame.transpose(Produce)
+
+#print(result)
+
+new = DataFrame.rename

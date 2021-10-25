@@ -46,8 +46,7 @@ from pandas.core.frame import DataFrame
 
 Produce = pd.DataFrame(produce_dictionary)
 
-result = DataFrame.transpose(Produce)
+result = DataFrame.transpose(Produce).rename(columns={0: 'Cost Per Pound', 1: 'Quantity Sold', 2: 'Total Sale'})
 
-#print(result)
 
-new = DataFrame.rename
+print(result)

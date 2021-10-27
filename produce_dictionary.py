@@ -42,11 +42,112 @@ produce_dictionary = {'Potatoes': [0.86, 12219, 10508],
 
 
 import pandas as pd
-from pandas.core.frame import DataFrame
+from pandas.core.frame import DataFrame as df
 
 Produce = pd.DataFrame(produce_dictionary)
 
-result = DataFrame.transpose(Produce).rename(columns={0: 'Cost Per Pound', 1: 'Quantity Sold', 2: 'Total Sale'})
+result = df.transpose(Produce).rename(columns={0: 'Cost Per Pound', 1: 'Quantity Sold', 2: 'Total Sale'})
 
 
-print(result)
+#print(result)
+
+# 1.) Produce that had the highest and lowest sales in total sales (both name of produce and value)
+
+print("-------- #1: Produce that had the highest and lowest sales in total sales (both name of produce and value)--------")
+
+print("              ")
+
+total = result['Total Sale']
+
+sale_high = total.max()
+produce_highest_sale = total.idxmax()
+
+sale_low = total.min()
+produce_lowest_sale = total.idxmin()
+
+print("The highest sale for produce: ", produce_highest_sale, "Costing: $",sale_high)
+print("The lowest sale for produce: ", produce_lowest_sale, "Costing: $", sale_low)
+
+print("              ")
+print("              ")
+print("              ")
+
+# 2.) Using 'loc', display the quantity and total sales for 'Orange' and 'Beets' (together)
+print("-------#2: Using 'loc', display the quantity and total sales for 'Orange' and 'Beets' (together)------")
+
+print("              ")
+
+print(result.loc[["Orange","Beets"],["Quantity Sold","Total Sale"]])
+
+
+print("              ")
+print("              ")
+print("              ")
+
+# 3.) Using 'loc', display the total sales for 'Apples' through 'Lettuce'
+print("-----#3: Using 'loc', display the total sales for 'Apples' through 'Lettuce'-----")
+
+print("              ")
+
+print(result.loc["Apples":"Lettuce",["Total Sale"]])
+
+print("              ")
+print("              ")
+print("              ")
+
+# 4.) Using 'at', update the quantity sold for Apricots to 11,955 and total sales to 44,353.05
+print("-----#4: Using 'at', update the quantity sold for Apricots to 11,955 and total sales to 44,353.05-----")
+
+print("              ")
+
+x = result.at["Apricots","Quantity Sold"] = 11955
+
+k = result.at["Apricots","Total Sale"] = 44353.05
+
+print("Apricots new quantity is: ",x)
+print("Apricots new total sales is: $",k)
+
+print("              ")
+print("              ")
+print("              ")
+
+# 5.) What is the average quantity sold across all products? (print out ONLY quantity sold)
+print("-----#5: What is the average quantity sold across all products? (print out ONLY quantity sold)-----")
+
+print("              ")
+
+quantity_avg = result["Quantity Sold"].mean()
+
+print("The avg quantity sold for all products is: $",quantity_avg)
+
+print("              ")
+print("              ")
+print("              ")
+
+# 6.) Create a new dataframe for only those produce that have sold between 11,500 to 12,000 (quantity)
+print("-----#6: Create a new dataframe for only those produce that have sold between 11,500 to 12,000 (quantity)-----")
+
+print("              ")
+
+new_DataFrame = result[(result['Quantity Sold'] > 11500) & (result['Quantity Sold'] < 12000)]
+
+print("----All produce that has sold between 11500 and 12000 units shown below----")
+
+print(new_DataFrame)
+
+
+print("              ")
+print("              ")
+print("              ")
+
+
+# 7.) What is the total sales for the products in the above new dataframe? (print out ONLY total sales)
+print("-----#7: What is the total sales for the products in the above new dataframe? (print out ONLY total sales)-----")
+
+print("              ")
+
+TotalSales_NewDataFrame = new_DataFrame.iloc[:2]
+
+print("----The total sales for produce that sold between 11500 and 12000 units is sjown below----")
+
+print(TotalSales_NewDataFrame)
